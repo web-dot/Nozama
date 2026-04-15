@@ -93,6 +93,7 @@ public class SlidingWindow {
 	
 	// permutation i nstring
 	public static boolean checkInclusion(String s1, String s2) {
+		if (s2.length() < s1.length()) return false;
 		int[] pcount = new int[26];
 		int[] window = new int[26];
 		

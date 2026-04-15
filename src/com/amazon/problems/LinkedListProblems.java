@@ -145,7 +145,51 @@ public class LinkedListProblems {
 	
 	// maximum twin sum
 	public static int pairSum(ListNode head) {
-		return 0;
+		if(head == null || head.next == null) {return 0;}
+		ListNode slow = head;
+		ListNode fast = head;
+		while(fast != null && fast.next != null) {
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		ListNode prev = null;
+		ListNode next = null;
+		while(slow != null) {//current 
+			next = slow.next;
+			slow.next = prev;
+			prev = slow; // prev = current
+			slow = next; // current = next
+		}
+		
+		int max = 0;
+		ListNode first = head;
+		ListNode second = prev;
+		while(second != null) {
+			max = Math.max(max, first.val + second.val);
+			first = first.next;
+			second = second.next;
+		}
+		return max;
+	}
+	
+	public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+		ListNode dummy = new ListNode(-1);
+		ListNode tail = dummy;
+		while(l1 != null && l2 != null) {
+			if(l1.val <= l2.val) {
+				tail.next = l1;
+				l1 = l1.next;
+			}else {
+				tail.next = l2;
+				l2 = l2.next;
+			}
+			tail = tail.next;
+		}
+		// attach remaining
+		if(l1 != null) tail.next = l1;
+		if(l2 != null) tail.next = l2;
+		
+		return dummy.next;
 	}
 	
 	public static void main(String[] args) {
