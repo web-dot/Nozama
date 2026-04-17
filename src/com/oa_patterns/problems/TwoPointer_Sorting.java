@@ -1,4 +1,4 @@
-package com.amazon.problems;
+package com.oa_patterns.problems;
 
 import java.util.Arrays;
 
