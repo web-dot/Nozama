@@ -48,9 +48,44 @@ public class TwoPointers {
 		return maxWater;
 	}
 	
+	 public static int maxArea(int[] heights) {
+	        int left = 0;
+	        int right = heights.length - 1;
+	        int maxWater = 0;
+	        while(left < right){
+	            int h = Math.min(heights[left], heights[right]);
+	            int width = right - left;
+	            int area = h * width;
+	            maxWater = Math.max(maxWater, area);
+	            if(heights[left] < heights[right]){
+	                left++;
+	            }else{
+	                right--;
+	            }
+	        }
+	        return maxWater;
+	    }
+	 
+	 // number of boats
+		public static int numRescueBoats(int[] people, int limit) {
+			Arrays.sort(people);
+			int left = 0;
+			int right = people.length-1;
+			int boats = 0;
+			while(left <= right) {
+				int weight = people[left] + people[right];
+				if(weight <= limit) {
+					left++;
+				}
+				boats = boats + 1;
+				right--;
+			}
+			return boats;
+		}
+	
 	public static void main(String[] args) {
-		int[] heights = {1,8,6,2,5,4,8,3,7};
-		System.out.println(maxAreaBF(heights));
+		int[] people = {3};
+		System.out.println(numRescueBoats(people, 3));
 	}
 
 }
