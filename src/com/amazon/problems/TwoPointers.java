@@ -5,8 +5,62 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TwoPointers {
-
 	
+	// remove duplictes {0,0,1,1,1,2,2,3,3,4}
+	public static int removeDuplicates(int[] nums) {
+		int i = 0;
+		for(int j=1; j<nums.length; j++) {
+			if(nums[i] !=nums[j]) {
+				i++;
+				nums[i] = nums[j];
+			}
+		}
+		return i + 1;
+	}
+	
+	// valid palindrome 2
+	public static boolean validPalindrome(String s) {
+		int left = 0;
+		int right = s.length()-1;
+		while(left < right) {
+			if(s.charAt(left) != s.charAt(right)) {
+				return isPalindrome(s, left+1, right) ||
+						isPalindrome(s, left, right-1);
+			}
+			left++;
+			right--;
+		}
+		return true;
+	}
+	
+	public static boolean isPalindrome(String s, int left, int right) {
+		while(left < right) {
+			if(s.charAt(left) != s.charAt(right)) {
+				return false;
+			}
+			left++;
+			right--;
+		}
+		return true;
+	}
+
+	// two sum
+	public int[] twoSum(int[] numbers, int target) {
+        Arrays.sort(numbers);
+        int left = 0;
+        int right = numbers.length - 1;
+        while(left < right) {
+        	int sum = numbers[left] + numbers[right];
+        	if(sum == target) {
+        		return new int[] {left+1, right+1};
+        	}else if(sum < target) {
+        		left++;
+        	}else {
+        		right--;
+        	}
+        }
+        return new int[] {};
+    }
 	
 	// three sum [ -3, -2, -1, 0, 1, 2, 3, 4 ]
 	public static List<List<Integer>> threeSum(int[] nums){
@@ -82,10 +136,31 @@ public class TwoPointers {
 			}
 			return boats;
 		}
+		
+		// max number of ksum pairs - lc 1679
+		public int maxOperations(int[] nums, int k) {
+	        Arrays.sort(nums);
+	        int left = 0;
+	        int right = nums.length-1;
+	        int ops = 0;
+	        while(left < right) {
+	        	int sum = nums[left] + nums[right];
+	        	if(sum == k) {
+	        		ops++;
+	        		left++;
+	        		right--;
+	        	}else if(sum < k) {
+	        		left++;
+	        	}else {
+	        		right--;
+	        	}
+	        }
+	        return ops;
+	    }
 	
 	public static void main(String[] args) {
-		int[] people = {3};
-		System.out.println(numRescueBoats(people, 3));
+		String s = "abecbea";
+		System.out.println(validPalindrome(s));
 	}
 
 }
