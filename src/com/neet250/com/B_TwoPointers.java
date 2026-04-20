@@ -1,10 +1,19 @@
-package com.amazon.problems;
+package com.neet250.com;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-public class TwoPointers {
+/**
+ * remove duplicates from sorted array
+ * valid palindrome 2
+ * check palindrome
+ * two sum
+ * three sum
+ * max area 
+ * rescue boats
+ * k sum pairs
+ * */
+public class B_TwoPointers {
 	
 	// remove duplictes {0,0,1,1,1,2,2,3,3,4}
 	public static int removeDuplicates(int[] nums) {
@@ -42,6 +51,32 @@ public class TwoPointers {
 			right--;
 		}
 		return true;
+	}
+	
+	// merge strings
+	public static String mergeAlternately(String word1, String word2) {
+		int i = 0;
+		int j = 0;
+		
+		StringBuilder result = new StringBuilder();
+		while(i < word1.length() && j < word2.length()) {
+			result.append(word1.charAt(i));
+			result.append(word2.charAt(j));
+			i++;
+			j++;
+		}
+		
+		while(i < word1.length()) {
+			result.append(word1.charAt(i));
+			i++;
+		}
+		
+		while(j < word2.length()) {
+			result.append(word2.charAt(j));
+			j++;
+		}
+		
+		return result.toString();
 	}
 
 	// two sum

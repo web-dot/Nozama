@@ -8,7 +8,14 @@ import java.util.Map;
 
 public class SlidingWindow {
 
-	
+	/**
+	 * length of longest substring
+	 * find max average
+	 * find anagrams
+	 * permutation i nstring
+	 * max sum of distinct subarray
+	 * 
+	 * */
 	// longest substring with non-repeating chars
 	public static int lengthOfLongestSubstring(String s) {
 		int start = 0;
