@@ -6,6 +6,15 @@ import java.util.Set;
 
 public class C_SlidingWindow {
 	
+	/**
+	 * contains duplicate
+	 * best time to buy sell stock
+	 * longest substring without repeating char
+	 * permutations in a string
+	 * min size subarray
+	 * 27-04-26
+	 * */
+	
 	// contains duplicate - {1,2,3,1,2,3}
 	public static boolean containsNearbyDuplicate(int[] nums, int k) {
 		Set<Integer> set = new HashSet<>();
@@ -88,10 +97,61 @@ public class C_SlidingWindow {
 		return maxLen;
 	}
 	
+	// permutations in string - lc- 567 // abc, lecabee
+	public static boolean checkInclusion(String s1, String s2) {
+		int n = s1.length();
+		int m = s2.length();
+		if(n > m) return false;
+		
+		int[] sfreq = new int[26];
+		int[] window = new int[26];
+		
+		for(int i=0; i<n; i++) {
+			sfreq[s1.charAt(i) - 'a']++;
+			window[s2.charAt(i) - 'a']++;
+		}
+
+		if(matches(sfreq, window)) return true;
+		for(int i=n; i<m; i++) {
+			window[s2.charAt(i) - 'a']++;
+			window[s2.charAt(i - n) - 'a']--;
+			if(matches(sfreq, window)) return true;
+		}
+		return false;
+	}
+	
+	public static boolean matches(int[] a, int[] b) {
+		for(int i=0; i<26; i++) {
+			if(a[i] != b[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	
+	// minimum size subarray sum - lc- 209
+	public static int minSubArrayLen(int target, int[] nums) {
+		int left = 0;
+		int currentSum = 0;
+		int n = nums.length;
+		int minLen = n + 1;
+		for(int right=0; right<n-1; right++) {
+			currentSum = currentSum + nums[right];
+			while(currentSum >= target) {
+				minLen = Math.min(minLen, right - left + 1);
+				currentSum = currentSum - nums[left];
+				left++;
+			}
+		}
+		return minLen == n + 1 ? 0 : minLen;
+	}
+	
 	
 	public static void main(String[] args) {
-		String s = "abcabcbb";
-		System.out.println(lengthOfLongestSubstringUsingArray(s));
+		String s1 = "abc";
+		String s2 = "lecabee";
+		System.out.println(checkInclusion(s1, s2));
 	}
 
 }
